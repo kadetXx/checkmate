@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const Hero = styled(Container)`
   flex-grow: 1;
+  margin-top: 2rem;
 
   @media(max-width: 575px) {
     padding: 2rem 7% 0;

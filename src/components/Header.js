@@ -4,6 +4,7 @@ import Container from './Container'
 
 const Header = styled(Container)`
   position: fixed;
+  background: #FAFAFE;
   top: 0;
   left: 0;
 `
