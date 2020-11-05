@@ -10,6 +10,10 @@ const Form = styled.form`
   @media(max-width: 875px) {
     width: 98%;
   }
+
+  & h3 {
+    color: #383e56;
+  }
 `
 
 const Input = styled.input`
@@ -21,13 +25,18 @@ const Input = styled.input`
   outline: none;
 `
 
+const Submit = styled(Button)`
+  margin: .6rem 0;
+`
+
 function form() {
   return (
     <Form>
+      <h3>Join Checkmate Community</h3>
       <Input placeholder='Your full name' />
       <Input placeholder='Your email address' />
       <Input placeholder='Phone number' />
-      <Button type='submit' full> Sign Up </Button>
+      <Submit type='submit' full> Sign Up </Submit>
     </Form>
   )
 }
