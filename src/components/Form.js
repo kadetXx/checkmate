@@ -4,15 +4,21 @@ import styled from 'styled-components'
 import Button from '../components/Button'
 
 const Form = styled.form`
-  width: 50%;
+  width: 60%;
   box-sizing: border-box;
+
+  @media(max-width: 875px) {
+    width: 98%;
+  }
 `
 
 const Input = styled.input`
   width: 100%;
-  padding: .5rem 1rem;
-  margin: .7rem 0;
+  padding: .7rem 1rem;
+  margin: .6rem 0;
   box-sizing: border-box;
+  border: 1px solid #efefef;
+  outline: none;
 `
 
 function form() {
