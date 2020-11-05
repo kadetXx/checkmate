@@ -16,6 +16,11 @@ const StyledButton = styled.button`
   border-radius: 4px;
   font-family: 'Poppins', sans-serif;
   text-decoration: none;
+  outline: none;
+
+  &:hover {
+    border-color: #fcba03;
+  }
 `
 
 const Button = (props) => {

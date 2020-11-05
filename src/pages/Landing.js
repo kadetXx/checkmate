@@ -10,7 +10,7 @@ const Hero = styled(Container)`
   flex-grow: 1;
 
   @media(max-width: 575px) {
-    padding: 2rem 3% 0;
+    padding: 2rem 7% 0;
   }
 
   h2 {
@@ -51,7 +51,7 @@ const landing = () => {
         <span>virtual community</span>
       </h2>
 
-      <Link>
+      <Link to='/join'>
         <StyledButton secondary padding='.8rem 5rem'>
           Sign Up To Join On Slack
         </StyledButton>
