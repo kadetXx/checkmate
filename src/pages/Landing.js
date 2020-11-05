@@ -53,10 +53,10 @@ const landing = () => {
 
       <Link>
         <StyledButton secondary padding='.8rem 5rem'>
-          Sign Up For Early access
+          Sign Up To Join On Slack
         </StyledButton>
       </Link>
-      
+
     </Hero>
   );
 };
