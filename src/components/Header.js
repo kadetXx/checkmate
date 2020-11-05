@@ -14,13 +14,21 @@ const TextLogo = styled.h1`
   color: #3F3784;
   text-align: center;
   font-weight: bolder;
+
+  @media(max-width: 805px) {
+    font-size: 1.5rem
+  }
 `;
 
 const Icon = styled.a`
   color: #3F3784;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   margin-left: 1rem;
+
+  @media(max-width: 805px) {
+    font-size: 1.1rem
+  }
 
   &:hover {
     color: #383e56;
@@ -29,7 +37,7 @@ const Icon = styled.a`
 
 const header = () => {
   return (
-    <Header justify='space-between' padding='1.5rem 7%'>
+    <Header justify='space-between' align='center' padding='1.5rem 7%'>
       <TextLogo>Checkmate</TextLogo>
       <Container justify='space-between' align='center' padding='0 0 0 3rem' w='fit-content'>
         <Icon href='#'> <i class="fab fa-github"></i> </Icon>

@@ -7,13 +7,15 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  border: 1px solid ${props => props.secondary ? '#00BD80' : '#3F3784' };
-  background: ${props => props.outline? 'transparent' : props.secondary? '#00BD80' : '#3F3784'};
+  border: 1px solid ${props => props.secondary ? '#3F3784' : '#3F3784' };
+  background: ${props => props.outline? 'transparent' : props.secondary? '#3F3784' : '#3F3784'};
   width: ${props => props.full ? '100%' : props.half ? '50%' : 'fit-content'};
   padding: ${props => props.padding};
   text-transform: uppercase;
   font-weight: bold;
   border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
 `
 
 const Button = (props) => {
