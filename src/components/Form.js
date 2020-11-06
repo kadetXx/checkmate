@@ -52,7 +52,7 @@ const Error = styled(Container)`
   & span {
     margin: 0 0.5rem 0 0;
     padding: 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   & p {
@@ -81,7 +81,11 @@ const Form = () => {
     if ([name, email, phone, field].includes("")) {
       setError("Please fill all fields");
     } else if (phone.slice(0, 1) === "0") {
-      setError("Please use international format for phone");
+      setError("Please use international format for phone")
+    } else if (phone.length < 7) {
+
+      setError("Please enter a valid phone number")
+
     } else {
       setLoading(true);
 
@@ -135,7 +139,7 @@ const Form = () => {
 
       {error !== "" && (
         <Error justify="flex-start" align="center" padding=".7rem 1rem">
-          <span className="material-icons">error_outline</span>
+          <span class="fas fa-exclamation-circle"></span>
           <p> {error} </p>
 
           <small>
