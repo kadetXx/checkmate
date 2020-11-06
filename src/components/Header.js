@@ -12,7 +12,7 @@ const Header = styled(Container)`
 `
 
 const TextLogo = styled.h1`
-  font-size: 2rem;
+  font-size: 1.7rem;
   margin: 0;
   color: #3F3784;
   text-align: center;

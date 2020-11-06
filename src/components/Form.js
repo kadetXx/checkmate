@@ -69,6 +69,7 @@ const Form = () => {
 
   const [error, setError] = useState(false);
   const [alert, setAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
 
   const submitForm = (e) => {
@@ -81,7 +82,6 @@ const Form = () => {
         setError(false);
       }, 3000);
     } else if (phone.slice(0, 1) === "0") {
-      
       setError({
         display: true,
         msg: "Please use international format for phone",
@@ -90,28 +90,32 @@ const Form = () => {
       setTimeout(() => {
         setError(false);
       }, 3000);
-
     } else {
-      const db = firebase.firestore();
+      setLoading(true);
 
-      db.settings({
-        timestampsInSnapshots: true,
-      });
+      setTimeout(() => {
+        const db = firebase.firestore();
 
-      // eslint-disable-next-line
-      const userRef = db.collection("users").add({
-        name,
-        email,
-        phone: `+${phone}`,
-        field,
-      });
+        db.settings({
+          timestampsInSnapshots: true,
+        });
 
-      setName("");
-      setEmail("");
-      setPhone("");
-      setField("");
+        // eslint-disable-next-line
+        const userRef = db.collection("users").add({
+          name,
+          email,
+          phone: `+${phone}`,
+          field,
+        });
 
-      setAlert(true);
+        setName("");
+        setEmail("");
+        setPhone("");
+        setField("");
+
+        setAlert(true);
+        setLoading(false);
+      }, 2000);
     }
   };
 
@@ -140,7 +144,7 @@ const Form = () => {
       />
       <Input
         type='number'
-        placeholder='Phone number (080...)'
+        placeholder='Phone number'
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
@@ -152,18 +156,20 @@ const Form = () => {
         onChange={(e) => setField(e.target.value)}
       >
         <option value={null} hidden>
-          Select category
+          Skill Category
         </option>
         <option value='Tech Enthusiast'>Tech Enthusiast</option>
-        <option value='Frontend'>Frontend</option>
-        <option value='Backend'>Backend</option>
+        <option value='Frontend'>Frontend Dev</option>
+        <option value='Backend'>Backend Dev</option>
+        <option value='Mobile'>Mobile Dev</option>
         <option value='UI/UX Design'>UI/UX Design</option>
         <option value='Graphics Design'>Graphics Design</option>
         <option value='Technical Writing'>Technical Writing</option>
         <option value='Developer Advocate'>Developer Advocate</option>
+        <option value='Sponsor'>Tech Daddy/Mummy (Sponsors & Mentors)</option>
       </Input>
       <Submit type='submit' full>
-        Sign Up
+        {loading ? "Please wait..." : "Sign Up"}
       </Submit>
 
       {alert && <ALert alert={setAlert} completed={setCompleted} />}
