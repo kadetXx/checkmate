@@ -18,7 +18,6 @@ const GifContainer = styled(Container)`
   
   width: 100%;
   height: 100%;
-  
   background: url('/celebrate.gif')
 
 `
@@ -27,6 +26,7 @@ const Box = styled(Container)`
   background-color: #FAFAFE;
   text-align: center;
   border-radius: 6px;
+  height: 85%;
 
   @media(max-width: 805px) {
     width: 100%;
