@@ -108,33 +108,29 @@ const Form = () => {
       {error && (
         <Error justify='flex-start' align='center' padding='.5rem 1rem'>
           <span className='material-icons'>error_outline</span>
-          <p>Please fill all fields</p>
+          <p>Please fill all fields correctly</p>
         </Error>
       )}
 
       <Input
-        required
         type='text'
         placeholder='Your full name'
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <Input
-        required
         type='email'
         placeholder='Your email address'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
-        required
         type='number'
         placeholder='Phone number (080...)'
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
       <Input
-        required
         as='select'
         placeholder='Select your skillset'
         value={field}

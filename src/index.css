@@ -17,3 +17,7 @@ body {
   flex-direction: column;
   height: 100vh;
 }
+
+input, select {
+  background-color: transparent !important;
+}
