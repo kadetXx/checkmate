@@ -78,14 +78,15 @@ const Form = () => {
   const submitForm = (e) => {
     e.preventDefault();
 
+    const intlPhone = /\+[1-9][0-9]{9,13}/;
+    console.log(intlPhone.test(phone));
+
     if ([name, email, phone, field].includes("")) {
       setError("Please fill all fields");
-    } else if (["080", "090", "070", "081"].includes(phone.slice(0, 3))) {
-      setError("Please use intl format for phone, no spaces")
-    } else if (phone.length < 7) {
-
-      setError("Please enter a valid phone number")
-
+    } else if (phone.length < 8) {
+      setError("Please enter a valid phone number");
+    } else if (intlPhone.test(phone) === false) {
+      setError("Please use intl format for phone, no spaces");
     } else {
       setLoading(true);
 
@@ -116,7 +117,7 @@ const Form = () => {
               const userRef = db.collection("users").add({
                 name,
                 email,
-                phone: `+${phone}`,
+                phone, //: `+${phone}`,
                 field,
               });
 
@@ -163,7 +164,7 @@ const Form = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
-        type="number"
+        type="text"
         placeholder="Phone number"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
@@ -185,7 +186,9 @@ const Form = () => {
         <option value="Cloud">Cloud Engineering</option>
         <option value="UI/UX Design">UI/UX Design</option>
         <option value="Graphics Design">Graphics Design</option>
-        <option value="Data science/Machine learning" >Data Science/Machine Learning</option>
+        <option value="Data science/Machine learning">
+          Data Science/Machine Learning
+        </option>
         <option value="Technical Writing">Technical Writing</option>
         <option value="Developer Advocate">Developer Advocate</option>
         <option value="Sponsor">Tech Daddy/Mummy (Sponsors & Mentors)</option>
