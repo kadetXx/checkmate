@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import firebase from "../firebase/firebaseConfig";
 import styled from "styled-components";
 
 import Button from "../components/Button";
+import ALert from "../components/Alert";
 
 const StyledForm = styled.form`
   width: 60%;
@@ -25,6 +27,16 @@ const Input = styled.input`
   border: 1px solid #efefef;
   outline: none;
   -webkit-appearance: none;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
 `;
 
 const Submit = styled(Button)`
@@ -36,6 +48,9 @@ const Form = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [field, setField] = useState("");
+
+  const [alert, setAlert] = useState(false);
+  const [completed, setCompleted] = useState(false);
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -53,11 +68,12 @@ const Form = () => {
       field,
     });
 
-    console.log("done");
     setName("");
     setEmail("");
     setPhone("");
     setField("");
+
+    setAlert(true);
   };
 
   return (
@@ -76,8 +92,8 @@ const Form = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
-        type='text'
-        placeholder='Phone number'
+        type='number'
+        placeholder='Phone number (080...)'
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
@@ -88,7 +104,9 @@ const Form = () => {
         defaultValue={field}
         onChange={(e) => setField(e.target.value)}
       >
-        <option value={null} hidden>Select category</option>
+        <option value={null} hidden>
+          Select category
+        </option>
         <option value='Tech Enthusiast'>Tech Enthusiast</option>
         <option value='Frontend'>Frontend</option>
         <option value='Backend'>Backend</option>
@@ -100,6 +118,9 @@ const Form = () => {
       <Submit type='submit' full>
         Sign Up
       </Submit>
+
+      {alert && <ALert alert={setAlert} completed={setCompleted} />}
+      {completed && <Redirect to='/' />}
     </StyledForm>
   );
 };
