@@ -45,9 +45,9 @@ const header = () => {
     <Header justify='space-between' align='center' padding='1.5rem 7%'>
       <TextLogo as={Link} to='/'>Checkmate</TextLogo>
       <Container justify='space-between' align='center' padding='0 0 0 3rem' w='fit-content'>
-        <Icon href='#'> <i className="fab fa-github"></i> </Icon>
+        <Icon href='https://github.com/kadetXx/checkmate'> <i className="fab fa-github"></i> </Icon>
         <Icon href='#'> <i className="fab fa-facebook-f"></i> </Icon>
-        <Icon href='#'> <i className="fab fa-twitter"></i> </Icon>
+        <Icon href='https://twitter.com/checkmateafrica'> <i className="fab fa-twitter"></i> </Icon>
         <Icon href='#'> <i className="fab fa-instagram"></i> </Icon>
       </Container>
     </Header>
