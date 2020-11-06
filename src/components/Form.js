@@ -185,6 +185,7 @@ const Form = () => {
         <option value="Cloud">Cloud Engineering</option>
         <option value="UI/UX Design">UI/UX Design</option>
         <option value="Graphics Design">Graphics Design</option>
+        <option value="Data science/Machine learning" >Data Science/Machine Learning</option>
         <option value="Technical Writing">Technical Writing</option>
         <option value="Developer Advocate">Developer Advocate</option>
         <option value="Sponsor">Tech Daddy/Mummy (Sponsors & Mentors)</option>
