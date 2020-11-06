@@ -80,8 +80,8 @@ const Form = () => {
 
     if ([name, email, phone, field].includes("")) {
       setError("Please fill all fields");
-    } else if (phone.slice(0, 1) === "0") {
-      setError("Please use international format for phone")
+    } else if (["080", "090", "070", "081"].includes(phone.slice(0, 3))) {
+      setError("Please use intl format for phone, no spaces")
     } else if (phone.length < 7) {
 
       setError("Please enter a valid phone number")
@@ -182,6 +182,7 @@ const Form = () => {
         <option value="Frontend">Frontend Dev</option>
         <option value="Backend">Backend Dev</option>
         <option value="Mobile">Mobile Dev</option>
+        <option value="Cloud">Cloud Based</option>
         <option value="UI/UX Design">UI/UX Design</option>
         <option value="Graphics Design">Graphics Design</option>
         <option value="Technical Writing">Technical Writing</option>
