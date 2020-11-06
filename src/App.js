@@ -8,12 +8,12 @@ import SignUp from './pages/Signup'
 function App() {
   return (
     <div className="App">
-      <Header />
       <Router>
+        <Header />
         <Route exact path="/" component={Landing} />
         <Route exact path="/join" component={SignUp} />
+        <Footer />
       </Router>
-      <Footer />
     </div>
   );
 }

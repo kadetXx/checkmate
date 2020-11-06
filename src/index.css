@@ -21,3 +21,11 @@ body {
 input, select {
   background-color: transparent !important;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}

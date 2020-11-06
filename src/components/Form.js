@@ -52,10 +52,12 @@ const Error = styled(Container)`
   & span {
     margin: 0 0.5rem 0 0;
     padding: 0;
+    font-size: 1.2rem;
   }
 
   & p {
     margin: 0;
+    font-size: 0.8rem;
   }
 `;
 
@@ -73,11 +75,22 @@ const Form = () => {
     e.preventDefault();
 
     if ([name, email, phone, field].includes("")) {
-      setError(true);
+      setError({ display: true, msg: "Please fill all fields" });
 
       setTimeout(() => {
         setError(false);
       }, 3000);
+    } else if (phone.slice(0, 1) === "0") {
+      
+      setError({
+        display: true,
+        msg: "Please use international format for phone",
+      });
+
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+
     } else {
       const db = firebase.firestore();
 
@@ -89,7 +102,7 @@ const Form = () => {
       const userRef = db.collection("users").add({
         name,
         email,
-        phone: `+234${phone.slice(1, 11)}`,
+        phone: `+${phone}`,
         field,
       });
 
@@ -106,10 +119,10 @@ const Form = () => {
     <StyledForm onSubmit={submitForm}>
       <h3>Join Checkmate Community</h3>
 
-      {error && (
-        <Error justify='flex-start' align='center' padding='.5rem 1rem'>
+      {error.display && (
+        <Error justify='flex-start' align='center' padding='.7rem 1rem'>
           <span className='material-icons'>error_outline</span>
-          <p>Please fill all fields correctly</p>
+          <p> {error.msg} </p>
         </Error>
       )}
 
