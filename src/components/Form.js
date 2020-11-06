@@ -59,6 +59,10 @@ const Error = styled(Container)`
     margin: 0;
     font-size: 0.8rem;
   }
+
+  & small {
+    display: none;
+  }
 `;
 
 const Form = () => {
@@ -66,7 +70,7 @@ const Form = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [field, setField] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [alert, setAlert] = useState(false);
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
@@ -75,20 +79,9 @@ const Form = () => {
     e.preventDefault();
 
     if ([name, email, phone, field].includes("")) {
-      setError({ display: true, msg: "Please fill all fields" });
-
-      setTimeout(() => {
-        setError(false);
-      }, 3000);
+      setError("Please fill all fields");
     } else if (phone.slice(0, 1) === "0") {
-      setError({
-        display: true,
-        msg: "Please use international format for phone",
-      });
-
-      setTimeout(() => {
-        setError(false);
-      }, 3000);
+      setError("Please use international format for phone");
     } else {
       setLoading(true);
 
@@ -96,33 +89,21 @@ const Form = () => {
         const db = firebase.firestore();
         const registeredUsers = [];
 
-
         db.collection("users")
           .get()
-          .then(querySnapshot => {
-
+          .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               registeredUsers.push(doc.data().email.toString());
             });
-
           })
           .then(() => {
-
             // console.log(registered)
 
             if (registeredUsers.includes(email.toString())) {
-              setError({
-                display: true,
-                msg: "This email is already registered",
-              });
+              setError("This email is already registered");
 
               setLoading(false);
-              setTimeout(() => {
-                setError(false)
-              }, 3000);
-
             } else {
-
               db.settings({
                 timestampsInSnapshots: true,
               });
@@ -143,7 +124,6 @@ const Form = () => {
               setAlert(true);
               setLoading(false);
             }
-
           });
       }, 2000);
     }
@@ -153,10 +133,16 @@ const Form = () => {
     <StyledForm onSubmit={submitForm}>
       <h3>Join Checkmate Community</h3>
 
-      {error.display && (
+      {error !== "" && (
         <Error justify="flex-start" align="center" padding=".7rem 1rem">
           <span className="material-icons">error_outline</span>
-          <p> {error.msg} </p>
+          <p> {error} </p>
+
+          <small>
+            {setTimeout(() => {
+              setError("");
+            }, 3000)}
+          </small>
         </Error>
       )}
 
