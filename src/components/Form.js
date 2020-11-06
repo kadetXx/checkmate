@@ -79,7 +79,6 @@ const Form = () => {
     e.preventDefault();
 
     const intlPhone = /\+[1-9][0-9]{9,13}/;
-    console.log(intlPhone.test(phone));
 
     if ([name, email, phone, field].includes("")) {
       setError("Please fill all fields");
