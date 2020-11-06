@@ -41,10 +41,10 @@ const header = () => {
     <Header justify='space-between' align='center' padding='1.5rem 7%'>
       <TextLogo>Checkmate</TextLogo>
       <Container justify='space-between' align='center' padding='0 0 0 3rem' w='fit-content'>
-        <Icon href='#'> <i class="fab fa-github"></i> </Icon>
-        <Icon href='#'> <i class="fab fa-facebook-f"></i> </Icon>
-        <Icon href='#'> <i class="fab fa-twitter"></i> </Icon>
-        <Icon href='#'> <i class="fab fa-instagram"></i> </Icon>
+        <Icon href='#'> <i className="fab fa-github"></i> </Icon>
+        <Icon href='#'> <i className="fab fa-facebook-f"></i> </Icon>
+        <Icon href='#'> <i className="fab fa-twitter"></i> </Icon>
+        <Icon href='#'> <i className="fab fa-instagram"></i> </Icon>
       </Container>
     </Header>
   );

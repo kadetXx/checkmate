@@ -4,7 +4,7 @@ import Container from '../components/Container'
 
 const Text = styled.p`
   text-align: center;
-
+  color: grey;
 `
 
 const Footer = () => {
