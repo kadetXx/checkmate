@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import firebase from "../firebase/firebaseConfig";
 import styled from "styled-components";
 
+import Container from "../components/Container";
 import Button from "../components/Button";
 import ALert from "../components/Alert";
 
@@ -43,61 +44,97 @@ const Submit = styled(Button)`
   margin: 0.6rem 0;
 `;
 
+const Error = styled(Container)`
+  margin: 0.6rem 0;
+  background-color: #fff3cd;
+  color: #8c6c10;
+
+  & span {
+    margin: 0 0.5rem 0 0;
+    padding: 0;
+  }
+
+  & p {
+    margin: 0;
+  }
+`;
+
 const Form = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [field, setField] = useState("");
 
+  const [error, setError] = useState(false);
   const [alert, setAlert] = useState(false);
   const [completed, setCompleted] = useState(false);
 
   const submitForm = (e) => {
     e.preventDefault();
 
-    const db = firebase.firestore();
+    if ([name, email, phone, field].includes("")) {
+      setError(true);
 
-    db.settings({
-      timestampsInSnapshots: true,
-    });
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    } else {
+      const db = firebase.firestore();
 
-    const userRef = db.collection("users").add({
-      name,
-      email,
-      phone: `+234${phone.slice(1, 11)}`,
-      field,
-    });
+      db.settings({
+        timestampsInSnapshots: true,
+      });
 
-    setName("");
-    setEmail("");
-    setPhone("");
-    setField("");
+      const userRef = db.collection("users").add({
+        name,
+        email,
+        phone: `+234${phone.slice(1, 11)}`,
+        field,
+      });
 
-    setAlert(true);
+      setName("");
+      setEmail("");
+      setPhone("");
+      setField("");
+
+      setAlert(true);
+    }
   };
 
   return (
     <StyledForm onSubmit={submitForm}>
       <h3>Join Checkmate Community</h3>
+
+      {error && (
+        <Error justify='flex-start' align='center' padding='.5rem 1rem'>
+          <span className='material-icons'>error_outline</span>
+          <p>Please fill all fields</p>
+        </Error>
+      )}
+
       <Input
+        required
         type='text'
         placeholder='Your full name'
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <Input
+        required
         type='email'
         placeholder='Your email address'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
+        required
         type='number'
         placeholder='Phone number (080...)'
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
       <Input
+        required
         as='select'
         placeholder='Select your skillset'
         value={field}

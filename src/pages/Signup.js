@@ -10,7 +10,7 @@ const FormContainer = styled(Container)`
 
 function signup() {
   return (
-    <FormContainer justify='center' align='center' padding='2rem 7% 1rem' >
+    <FormContainer justify='center' align='center' padding='4rem 7% 1rem' >
       <Form />
     </FormContainer>
   )
