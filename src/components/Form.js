@@ -85,6 +85,7 @@ const Form = () => {
         timestampsInSnapshots: true,
       });
 
+      // eslint-disable-next-line
       const userRef = db.collection("users").add({
         name,
         email,
