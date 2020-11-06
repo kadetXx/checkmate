@@ -17,9 +17,10 @@ const StyledButton = styled.button`
   font-family: 'Poppins', sans-serif;
   text-decoration: none;
   outline: none;
+  transition: opacity linear .3s;
 
   &:hover {
-    border-color: #fcba03;
+    opacity: 0.8;
   }
 `
 

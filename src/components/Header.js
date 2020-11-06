@@ -36,6 +36,7 @@ const Icon = styled.a`
 
   &:hover {
     color: #383e56;
+    transform: scale(1.07)
   }
 `
 
