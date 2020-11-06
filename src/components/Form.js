@@ -182,7 +182,7 @@ const Form = () => {
         <option value="Frontend">Frontend Dev</option>
         <option value="Backend">Backend Dev</option>
         <option value="Mobile">Mobile Dev</option>
-        <option value="Cloud">Cloud Based</option>
+        <option value="Cloud">Cloud Engineering</option>
         <option value="UI/UX Design">UI/UX Design</option>
         <option value="Graphics Design">Graphics Design</option>
         <option value="Technical Writing">Technical Writing</option>
