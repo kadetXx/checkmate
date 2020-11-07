@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import firebase from "../../firebase/firebaseConfig";
+import {db} from "../../firebaseConfig";
 
 import { StyledForm, Input, Submit, Error } from './Styled'
 
@@ -15,6 +15,7 @@ const Form = () => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
 
+
   const submitForm = (e) => {
     e.preventDefault();
 
@@ -24,7 +25,7 @@ const Form = () => {
       setLoading(true);
 
       setTimeout(() => {
-        const db = firebase.firestore();
+
         const registeredUsers = [];
 
         db.collection("users")
