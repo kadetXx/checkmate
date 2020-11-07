@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { db } from "../../firebaseConfig";
 import axios from "axios";
@@ -35,10 +35,6 @@ const Form = () => {
     <small style="margin-top: 4rem; font-size: 11px;">© checkmate africa 2020</small>
   </div>
   `;
-
-  // useEffect(() => {
-    
-  // }, []);
 
   const sendMail = () => {
     axios
