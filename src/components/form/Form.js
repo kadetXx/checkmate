@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import {db} from "../../firebaseConfig";
+import { db } from "../../firebaseConfig";
+import axios from "axios";
 
-import { StyledForm, Input, Submit, Error } from './Styled'
+import { StyledForm, Input, Submit, Error } from "./Styled";
 
 import ALert from "./Alert";
 
@@ -15,6 +16,43 @@ const Form = () => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
 
+  const slackInviteLink = `https://join.slack.com/t/checkmateafrica/shared_invite/zt-ipbocwet-osp1wujg56N6ef2r7UV5vQ`
+
+  const mailTemplate = `
+  <div style="padding-top: 10px;">
+    <h2 style="color: #3F3784" >Checkmate Community</h2>
+    <h4 style="margin-bottom: 0" >Hi ${name}</h4>
+    <p style="margin-top: 0.4rem; padding: 0 1rem 0 0;">
+      Thanks for signing up. Here's your invite link to join our slack virtual workspace. Have fun!
+    </p>
+    <a href=${slackInviteLink} style="text-decoration: none; color: #fff;">
+      <button style="outline: none; margin: .3rem 0 20px; padding: .7rem 1rem; background-color: #3F3784; color: #fff; border: none; border-radius: 2px;">Join Checkmate</button>
+    </a>
+    <br>
+
+    <small style="margin-top: 4rem; font-size: 11px;">kindly ignore this message if you have joined already</small>
+    <br>
+    <small style="margin-top: 4rem; font-size: 11px;">© checkmate africa 2020</small>
+  </div>
+  `;
+
+  // useEffect(() => {
+    
+  // }, []);
+
+  const sendMail = () => {
+    axios
+      .post("https://mailer-api-app.herokuapp.com/api/v1/send/to_one", {
+        mail: email,
+        message: mailTemplate,
+        subject: "Checkmate Invite",
+        from: "hello@checkmate.africa",
+      })
+      .then((res) => console.log(res.data.message))
+      .catch((err) => console.log(err));
+
+    // eslint-disable-next-line
+  }
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -25,7 +63,6 @@ const Form = () => {
       setLoading(true);
 
       setTimeout(() => {
-
         const registeredUsers = [];
 
         db.collection("users")
@@ -51,6 +88,9 @@ const Form = () => {
                 field,
               });
 
+              // call mail sender function
+              sendMail();
+
               setName("");
               setEmail("");
               setField("");
@@ -59,7 +99,7 @@ const Form = () => {
               setLoading(false);
             }
           })
-          .catch(err => setAlert(`${err}`));
+          .catch((err) => setAlert(`${err}`));
       }, 2000);
     }
   };
@@ -99,26 +139,28 @@ const Form = () => {
         value={field}
         onChange={(e) => setField(e.target.value)}
       >
-        <option value={null} hidden>Skill Category *</option>
+        <option value={null} hidden>
+          Skill Category *
+        </option>
 
-        {
-          [
-            "Tech Enthusiast",
-            "Frontend Dev",
-            "Backend Dev",
-            "Mobile Dev",
-            "Cloud Engineering",
-            "UI/UX Design",
-            "Graphics Design",
-            "Data Science/Machine Learning",
-            "Technical Writing",
-            "Developer Advocate",
-            "Tech Daddy/Mummy (Sponsors & Mentors)",
-          ].map((option, index) => (
-            <option key={index} value={option}> {option} </option>
-          ))
-        }
-        
+        {[
+          "Tech Enthusiast",
+          "Frontend Dev",
+          "Backend Dev",
+          "Mobile Dev",
+          "Cloud Engineering",
+          "UI/UX Design",
+          "Graphics Design",
+          "Data Science/Machine Learning",
+          "Technical Writing",
+          "Developer Advocate",
+          "Tech Daddy/Mummy (Sponsors & Mentors)",
+        ].map((option, index) => (
+          <option key={index} value={option}>
+            {" "}
+            {option}{" "}
+          </option>
+        ))}
       </Input>
       <Submit type='submit' full>
         {loading ? "Please wait..." : "Sign Up"}
