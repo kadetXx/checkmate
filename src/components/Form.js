@@ -80,11 +80,11 @@ const Form = () => {
 
     const intlPhone = /\+[1-9][0-9]{9,13}/;
 
-    if ([name, email, phone, field].includes("")) {
-      setError("Please fill all fields");
-    } else if (phone.length < 8) {
-      setError("Please enter a valid phone number");
-    } else if (intlPhone.test(phone) === false) {
+    if ([name, email, field].includes("")) {
+      setError("Please fill required fields");
+    } else if (phone !== "" && phone.length < 8) {
+      setError("Enter valid phone number or leave blank");
+    } else if (phone !== "" && intlPhone.test(phone) === false) {
       setError("Please use intl format for phone, no spaces");
     } else {
       setLoading(true);
@@ -101,11 +101,8 @@ const Form = () => {
             });
           })
           .then(() => {
-            // console.log(registered)
-
             if (registeredUsers.includes(email.toString())) {
               setError("This email is already registered");
-
               setLoading(false);
             } else {
               db.settings({
@@ -116,8 +113,8 @@ const Form = () => {
               const userRef = db.collection("users").add({
                 name,
                 email,
-                phone, //: `+${phone}`,
-                field,
+                phone: phone === "" ? "Unavailable" : phone,
+                field
               });
 
               setName("");
@@ -138,8 +135,8 @@ const Form = () => {
       <h3>Join Checkmate Community</h3>
 
       {error !== "" && (
-        <Error justify="flex-start" align="center" padding=".7rem 1rem">
-          <span class="fas fa-exclamation-circle"></span>
+        <Error justify='flex-start' align='center' padding='.7rem 1rem'>
+          <span className='fas fa-exclamation-circle'></span>
           <p> {error} </p>
 
           <small>
@@ -151,53 +148,52 @@ const Form = () => {
       )}
 
       <Input
-        type="text"
-        placeholder="Your full name"
+        type='text'
+        placeholder='Your full name *'
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <Input
-        type="email"
-        placeholder="Your email address"
+        type='email'
+        placeholder='Your email address *'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
-        type="text"
-        placeholder="Phone number"
+        type='text'
+        placeholder='Phone number'
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
       <Input
-        as="select"
-        placeholder="Select your skillset"
+        as='select'
+        placeholder='Select your skillset'
         value={field}
-        defaultValue={field}
         onChange={(e) => setField(e.target.value)}
       >
         <option value={null} hidden>
-          Skill Category
+          Skill Category *
         </option>
-        <option value="Tech Enthusiast">Tech Enthusiast</option>
-        <option value="Frontend">Frontend Dev</option>
-        <option value="Backend">Backend Dev</option>
-        <option value="Mobile">Mobile Dev</option>
-        <option value="Cloud">Cloud Engineering</option>
-        <option value="UI/UX Design">UI/UX Design</option>
-        <option value="Graphics Design">Graphics Design</option>
-        <option value="Data science/Machine learning">
+        <option value='Tech Enthusiast'>Tech Enthusiast</option>
+        <option value='Frontend'>Frontend Dev</option>
+        <option value='Backend'>Backend Dev</option>
+        <option value='Mobile'>Mobile Dev</option>
+        <option value='Cloud'>Cloud Engineering</option>
+        <option value='UI/UX Design'>UI/UX Design</option>
+        <option value='Graphics Design'>Graphics Design</option>
+        <option value='Data science/Machine learning'>
           Data Science/Machine Learning
         </option>
-        <option value="Technical Writing">Technical Writing</option>
-        <option value="Developer Advocate">Developer Advocate</option>
-        <option value="Sponsor">Tech Daddy/Mummy (Sponsors & Mentors)</option>
+        <option value='Technical Writing'>Technical Writing</option>
+        <option value='Developer Advocate'>Developer Advocate</option>
+        <option value='Sponsor'>Tech Daddy/Mummy (Sponsors & Mentors)</option>
       </Input>
-      <Submit type="submit" full>
+      <Submit type='submit' full>
         {loading ? "Please wait..." : "Sign Up"}
       </Submit>
 
       {alert && <ALert alert={setAlert} completed={setCompleted} />}
-      {completed && <Redirect to="/" />}
+      {completed && <Redirect to='/' />}
     </StyledForm>
   );
 };
