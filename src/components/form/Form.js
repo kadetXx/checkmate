@@ -57,7 +57,8 @@ const Form = () => {
               setAlert(true);
               setLoading(false);
             }
-          });
+          })
+          .catch(err => setAlert(`${err}`));
       }, 2000);
     }
   };
