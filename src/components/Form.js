@@ -68,7 +68,6 @@ const Error = styled(Container)`
 const Form = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [field, setField] = useState("");
   const [error, setError] = useState("");
   const [alert, setAlert] = useState(false);
@@ -78,14 +77,8 @@ const Form = () => {
   const submitForm = (e) => {
     e.preventDefault();
 
-    const intlPhone = /\+[1-9][0-9]{9,13}/;
-
     if ([name, email, field].includes("")) {
       setError("Please fill required fields");
-    } else if (phone !== "" && phone.length < 8) {
-      setError("Enter valid phone number or leave blank");
-    } else if (phone !== "" && intlPhone.test(phone) === false) {
-      setError("Please use intl format for phone, no spaces");
     } else {
       setLoading(true);
 
@@ -113,13 +106,11 @@ const Form = () => {
               const userRef = db.collection("users").add({
                 name,
                 email,
-                phone: phone === "" ? "Unavailable" : phone,
-                field
+                field,
               });
 
               setName("");
               setEmail("");
-              setPhone("");
               setField("");
 
               setAlert(true);
@@ -158,12 +149,6 @@ const Form = () => {
         placeholder='Your email address *'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type='text'
-        placeholder='Phone number'
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
       />
       <Input
         as='select'
