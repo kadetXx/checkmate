@@ -148,6 +148,7 @@ const Form = () => {
           "UI/UX Design",
           "Graphics Design",
           "Data Science/Machine Learning",
+          "Cyber Security",
           "Technical Writing",
           "Developer Advocate",
           "Tech Daddy/Mummy (Sponsors & Mentors)",
