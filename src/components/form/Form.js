@@ -149,6 +149,7 @@ const Form = () => {
           "Graphics Design",
           "Data Science/Machine Learning",
           "Cyber Security",
+          "Fullstack Dev",
           "Technical Writing",
           "Developer Advocate",
           "Tech Daddy/Mummy (Sponsors & Mentors)",
